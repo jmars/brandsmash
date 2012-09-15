@@ -1,3 +1,3 @@
 {"author":"","name":"foobar","description":"","version":"0.0.1","dependencies":
-{"marrow":"https://github.com/Benvie/contextify/tarball/master","express":"","stylus":"","nib":"","jade":"","iced-coffee-script":"", "passport":"", "passport-facebook":""}
+{"marrow":"https://github.com/jmars/marrow/tarball/master","express":"","stylus":"","nib":"","jade":"","iced-coffee-script":"", "passport":"", "passport-facebook":""}
 }
