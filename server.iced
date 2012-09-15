@@ -15,17 +15,15 @@ compile = (str, path) ->
 	.use(nib())
 
 `var passport = require('passport')
-  , FacebookStrategy = require('passport-facebook').Strategy;
+  , GoogleStrategy = require('passport-google').Strategy;
 
-passport.use(new FacebookStrategy({
-    clientID: '399424960124363',
-    clientSecret: '7f24e462f20a47878a4b4e10f4609d4b',
-    callbackURL: "http://www.example.com/auth/facebook/callback"
+passport.use(new GoogleStrategy({
+    returnURL: 'http://http://8.19.32.62:5000/auth/google/return',
+    realm: 'http://http://8.19.32.62:5000/'
   },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate(function (err, user) {
-      if (err) { return done(err); }
-      done(null, user);
+  function(identifier, profile, done) {
+    User.findOrCreate({ openId: identifier }, function (err, user) {
+      done(err, user);
     });
   }
 ));`
@@ -41,19 +39,17 @@ app.server.use express.static "#{__dirname}/assets"
 app.load __dirname
 app.layout = (req, res, next, cb) -> cb null, layout
 
-`// Redirect the user to Facebook for authentication.  When complete,
-// Facebook will redirect the user back to the application at
-// /auth/facebook/callback
-app.server.get('/auth/facebook', passport.authenticate('facebook'));
+`// Redirect the user to Google for authentication.  When complete, Google
+// will redirect the user back to the application at
+// /auth/google/return
+app.get('/auth/google', passport.authenticate('google'));
 
-// Facebook will redirect the user to this URL after approval.  Finish the
-// authentication process by attempting to obtain an access token.  If
-// access was granted, the user will be logged in.  Otherwise,
-// authentication has failed.
-app.server.get('/auth/facebook/callback', 
-  passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
-`
+// Google will redirect the user to this URL after authentication.  Finish
+// the process by verifying the assertion.  If valid, the user will be
+// logged in.  Otherwise, authentication has failed.
+app.get('/auth/google/return', 
+  passport.authenticate('google', { successRedirect: '/',
+                                    failureRedirect: '/login' }));`
 
 app.listen 5000, ->
   console.log 'server started'
