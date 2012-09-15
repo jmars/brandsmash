@@ -22,9 +22,10 @@ passport.use(new GoogleStrategy({
     realm: 'http://8.19.32.62:5000/'
   },
   function(identifier, profile, done) {
-    User.findOrCreate({ openId: identifier }, function (err, user) {
-      done(err, user);
-    });
+    //User.findOrCreate({ openId: identifier }, function (err, user) {
+    //  done(err, user);
+    //});
+		done(null, {});
   }
 ));`
 
