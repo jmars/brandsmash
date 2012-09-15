@@ -37,6 +37,8 @@ app.server.use stylus.middleware
   src: "#{__dirname}/assets"
   compile: compile
 app.server.use express.static "#{__dirname}/assets"
+app.server.use passport.initialize()
+app.server.use passport.session()
 app.load __dirname
 app.layout = (req, res, next, cb) -> cb null, layout
 
