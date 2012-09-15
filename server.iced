@@ -29,6 +29,12 @@ passport.use(new GoogleStrategy({
   }
 ));`
 
+passport.serializeUser (user, done) ->
+	done null, user.id
+
+passport.deserializeUser (id, done) ->
+	done null, {}
+
 app = new marrow
 app.server.configure 'production', ->
   app.server.use express.compress()
