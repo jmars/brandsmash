@@ -14,6 +14,14 @@ compile = (str, path) ->
 	.set('compress', true)
 	.use(nib())
 
+users = {}
+
+findorCreate = (identifier, profile, done) ->
+	if !users[identifier]?
+		users[identifier] =
+			id: identifier
+	done null, users[identifier]
+
 `var passport = require('passport')
   , GoogleStrategy = require('passport-google').Strategy;
 
@@ -21,15 +29,8 @@ passport.use(new GoogleStrategy({
     returnURL: 'http://8.19.32.62:5000/auth/google/return',
     realm: 'http://8.19.32.62:5000/'
   },
-  function(identifier, profile, done) {
-    //User.findOrCreate({ openId: identifier }, function (err, user) {
-    //  done(err, user);
-    //});
-		done(null, {});
-  }
+  findorCreate
 ));`
-
-users = {}
 
 passport.serializeUser (user, done) ->
 	users[user.id] = user
