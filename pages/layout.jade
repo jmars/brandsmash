@@ -1,0 +1,30 @@
+!!! 5
+html
+	head
+		link(rel='stylesheet', href='/styles/style.css')
+	body
+		.container-fluid
+			.row-fluid.header
+				h1 BRAND MASH
+			.row-fluid.score
+				p your score
+			.row-fluid
+				a(href='/auth/facebook') Login with Facebook
+			.row-fluid.intro
+				p.lead Which Brand do your prefer?
+			.row-fluid.compare
+				.span3.offset3
+					img(src='http://placehold.it/250x250')
+					.row-fluid
+						button.btn.btn-primary this one
+				.span1.vs
+					p.lead VS
+				.span3
+					img(src='http://placehold.it/250x250')
+					.row-fluid
+						button.btn.btn-primary this one
+			.row-fluid
+				.span1.skip.offset6
+					p
+						button.btn.btn-large SKIP
+		script(data-main='/requirejs/main', src='/almond.js', type='text/javascript')
