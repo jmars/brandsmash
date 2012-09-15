@@ -1,3 +1,6 @@
 {"name":"foobar","dependencies":{
-	"component/jquery":"*"
+	"component/jquery":"*",
+	"jmars/future":"*",
+	"jmars/remote":"*",
+	"jmars/sockjs-client":"*"
 }}

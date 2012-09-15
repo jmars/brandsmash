@@ -1,0 +1,11 @@
+{
+  "name": "remote",
+  "dependencies": {
+    "jmars/future": "*",
+    "jmars/uuid": "*"
+  },
+  "scripts": [
+    "lib/index.js"
+  ],
+  "repo": "https://raw.github.com/jmars/remote"
+}

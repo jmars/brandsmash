@@ -3,6 +3,8 @@ stylus = require 'stylus'
 nib = require 'nib'
 express = require 'express'
 jade = require 'jade'
+fs = require 'fs'
+Future = require 'future'
 
 server = express()
 
@@ -13,6 +15,19 @@ compile = (str, path) ->
 	.set('filename', path)
 	.set('compress', true)
 	.use(nib())
+
+`function pickRandomProperty(obj) {
+    var result;
+    var count = 0;
+    for (var prop in obj)
+        if (Math.random() < 1/++count)
+           result = prop;
+    return result;
+}`
+
+industries = {}
+for industry in fs.readdirSync "#{__dirname}/assets/logos"
+	industries[industry] = fs.readdirSync("#{__dirname}/assets/logos/#{industry}")
 
 users = {}
 
@@ -51,6 +66,17 @@ app.server.use passport.initialize()
 app.server.use passport.session()
 app.load __dirname
 app.layout = (req, res, next, cb) -> cb null, layout
+
+app.RPC =
+	industry: ->
+		future = Future()
+		industry = pickRandomProperty(industries)
+		future.resolve industry
+
+	index: ->
+		future = Future()
+		index = [Math.floor(industries[industry].length * Math.random())]
+		future.resolve index
 
 `// Redirect the user to Google for authentication.  When complete, Google
 // will redirect the user back to the application at
