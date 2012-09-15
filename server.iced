@@ -18,8 +18,8 @@ compile = (str, path) ->
   , GoogleStrategy = require('passport-google').Strategy;
 
 passport.use(new GoogleStrategy({
-    returnURL: 'http://http://8.19.32.62:5000/auth/google/return',
-    realm: 'http://http://8.19.32.62:5000/'
+    returnURL: 'http://8.19.32.62:5000/auth/google/return',
+    realm: 'http://8.19.32.62:5000/'
   },
   function(identifier, profile, done) {
     User.findOrCreate({ openId: identifier }, function (err, user) {
