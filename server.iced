@@ -29,11 +29,14 @@ passport.use(new GoogleStrategy({
   }
 ));`
 
+users = {}
+
 passport.serializeUser (user, done) ->
-	done null, 'user'
+	users[user.id] = user
+	done null, user.id
 
 passport.deserializeUser (id, done) ->
-	done null, {}
+	done null, users[id]
 
 app = new marrow
 app.server.configure 'production', ->
