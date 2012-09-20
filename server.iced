@@ -4,7 +4,6 @@ nib = require 'nib'
 express = require 'express'
 jade = require 'jade'
 fs = require 'fs'
-Future = require 'future'
 
 server = express()
 
@@ -69,12 +68,12 @@ app.layout = (req, res, next, cb) -> cb null, layout
 
 app.RPC =
 	industry: ->
-		future = Future()
+		future = @Future()
 		industry = pickRandomProperty(industries)
 		future.resolve industry
 
 	index: ->
-		future = Future()
+		future = @Future()
 		index = [Math.floor(industries[industry].length * Math.random())]
 		future.resolve index
 
@@ -90,5 +89,5 @@ app.server.get('/auth/google/return',
   passport.authenticate('google', { successRedirect: '/',
                                     failureRedirect: '/login' }));`
 
-app.listen 5000, ->
+app.listen 3000, ->
   console.log 'server started'

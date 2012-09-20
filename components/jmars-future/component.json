@@ -1,8 +1,0 @@
-{
-  "name": "future",
-  "dependencies": {},
-  "scripts": [
-    "lib/index.js"
-  ],
-  "repo": "https://raw.github.com/jmars/future"
-}
