@@ -1,3 +1,5 @@
-define ['jquery', 'sockrpc'], ($, RPC) ->
+define ['jquery', 'sockrpc', 'synapse', 'synapse/object'], ($, RPC, Synapse, ObjectAdapter) ->
 	Remote = RPC 'index' ,'industry'
-	console.log Remote
+	future = Remote.industry()
+	future (result) ->
+		console.log result

@@ -1,5 +1,6 @@
 {"name":"foobar","dependencies":{
 	"component/jquery":"*",
 	"jmars/dustjs":"*",
-	"jmars/sockrpc":"*"
+	"jmars/sockrpc":"*",
+	"jmars/synapse":"*"
 }}

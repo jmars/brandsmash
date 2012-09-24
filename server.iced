@@ -1,4 +1,4 @@
-marrow = require 'marrow'
+portmanteau = require 'portmanteau'
 stylus = require 'stylus'
 nib = require 'nib'
 express = require 'express'
@@ -53,7 +53,7 @@ passport.serializeUser (user, done) ->
 passport.deserializeUser (id, done) ->
 	done null, users[id]
 
-app = new marrow
+app = new portmanteau
 app.server.configure 'production', ->
   app.server.use express.compress()
 app.server.use express.favicon()
@@ -70,12 +70,14 @@ app.RPC =
 	industry: ->
 		future = @Future()
 		industry = pickRandomProperty(industries)
-		future.resolve industry
+		process.nextTick -> future.resolve industry
+		future
 
 	index: ->
 		future = @Future()
 		index = [Math.floor(industries[industry].length * Math.random())]
-		future.resolve index
+		process.nextTick -> future.resolve index
+		future
 
 `// Redirect the user to Google for authentication.  When complete, Google
 // will redirect the user back to the application at
